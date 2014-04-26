@@ -79,6 +79,39 @@
 
                 return App.RuntasticData;
             });
+        },
+        getById: function (id) {
+            // this method will return item by id
+            var list = App.RuntasticData.list;
+
+            // start spinner
+            $('body')
+                .spin('large')
+                .addClass('spinner-parent');
+            $('table').fadeTo(200, 0.5);;
+
+            if (list.length == 0) {
+                // page is reloaded; lets retrieve item by it's id
+                return $.getJSON('http://intense-bastion-3210.herokuapp.com/run_sessions/' + id + '.json').then(function (response) {
+
+                    // stop spinner
+                    $('body')
+                        .spin(false)
+                        .removeClass('spinner-parent');
+                    $('table').fadeTo(200, 1);
+
+                    return response.run_session;
+                });
+            } else {
+
+                // stop spinner
+                $('body')
+                    .spin(false)
+                    .removeClass('spinner-parent');
+                $('table').fadeTo(200, 1);
+
+                return list.findBy('id', id);
+            }
         }
     });
 

@@ -31,7 +31,7 @@
         <script type="text/x-handlebars" id="index">
             {{! Index template }}
             <div class="table-responsive">
-                <table class="table table-condensed">
+                <table class="table table-condensed table table-striped table-hover">
                     <thead>
                         <tr>
                             <td {{action sortBy 'id'}}>ID</td>
@@ -44,14 +44,14 @@
                     </thead>
                     <tbody class="table-striped">
                         {{#each model.list}}
-                        <tr>
+                        {{#link-to 'detail' this tagName="tr"}}
                             <td>{{id}}</td>
                             <td>{{format-date start_time}}</td>
                             <td>{{format-date end_time}}</td>
                             <td>{{duration}}</td>
                             <td>{{distance}}</td>
                             <td>{{sport_type_id}}</td>
-                        </tr>
+                        {{/link-to}}
                         </tr>
                         {{/each}}
                     </tbody>
@@ -72,6 +72,36 @@
                     </tfoot>
                 </table>
             </div>
+        </script>
+
+        <script type="text/x-handlebars" id="detail">
+            {{! Detail template }}
+            <form role="form">
+                <div class="form-group">
+                    <label for="inputId">ID</label>
+                    {{input type="number" value=id id="inputId" class="form-control" readonly="true"}}
+                </div>
+                <div class="form-group">
+                    <label for="inputStartTime">Start time</label>
+                    {{view App.DateTime valueBinding="start_time" id="inputStartTime" class="form-control" type="text" readonly="true"}}
+                </div>
+                <div class="form-group">
+                    <label for="inputEndTime">End time</label>
+                    {{view App.DateTime valueBinding="end_time" id="inputEndTime" class="form-control" type="text" readonly="true"}}
+                </div>
+                <div class="form-group">
+                    <label for="inputduration">Duration</label>
+                    {{input type="number" value=duration id="inputduration" class="form-control" readonly="true"}}
+                </div>
+                <div class="form-group">
+                    <label for="inputDistance">Distance</label>
+                    {{input type="number" value=distance id="inputDistance" class="form-control" readonly="true"}}
+                </div>
+                <div class="form-group">
+                    <label for="inputSportTypeId">Sport type ID</label>
+                    {{input type="number" value=sport_type_id id="inputSportTypeId" class="form-control" readonly="true"}}
+                </div>
+            </form>
         </script>
 
     </body>

@@ -7,6 +7,10 @@
     cursor: pointer !important;
 }
 
+.table thead td {
+    font-weight: bold;
+}
+
 .title {
     margin: 30px 0 50px 0;
 }

@@ -1,0 +1,4 @@
+.spinner-parent {
+    cursor: wait;
+    pointer-events: none;
+}

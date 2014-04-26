@@ -21,6 +21,39 @@
                 App.Settings.sortBy = sortBy;
                 App.Settings.order = order;
                 App.RuntasticData.read();
+            },
+            paginateTo: function (page) {
+                // set page and refresh
+                App.Settings.currentPage = page;
+                App.RuntasticData.read();
+            },
+            paginateToPrev: function () {
+                // set page and refresh
+                if (App.Settings.currentPage > 1) {
+                    App.Settings.currentPage--;
+                    App.RuntasticData.read();
+                }
+            },
+            paginateToNext: function () {
+                // set page and refresh
+                if (App.Settings.currentPage < App.RuntasticData.totalPages) {
+                    App.Settings.currentPage++;
+                    App.RuntasticData.read();
+                }
+            },
+            paginateToLast: function (page) {
+                // set page and refresh
+                if (App.Settings.currentPage < App.RuntasticData.totalPages) {
+                    App.Settings.currentPage = App.RuntasticData.totalPages;
+                    App.RuntasticData.read();
+                }
+            },
+            paginateToFirst: function (page) {
+                // set page and refresh
+                if (App.Settings.currentPage > 1) {
+                    App.Settings.currentPage = 1;
+                    App.RuntasticData.read();
+                }
             }
         }
     });

@@ -1,4 +1,12 @@
 .spinner-parent {
-    cursor: wait;
+    cursor: wait !important;
     pointer-events: none;
+}
+
+.table thead td, .pagination-btn {
+    cursor: pointer !important;
+}
+
+.title {
+    margin: 30px 0 50px 0;
 }

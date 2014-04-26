@@ -12,13 +12,16 @@
         <script src="js/app.routes.js"></script>
         <script src="js/app.controllers.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/application.css" rel="stylesheet" />
     </head>
     <body>
 
         <script type="text/x-handlebars">
             {{! Skeleton template }}
-            <header class="navbar"></header>
-            <div class="container">{{outlet}}</div>
+            <div class="container">
+                <h1 class="title">Runtastic - Coding contest</h1>
+                {{outlet}}
+            </div>
             <footer class="container"></footer>
         </script>
 
@@ -49,6 +52,21 @@
                         </tr>
                         {{/each}}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6">
+                                <ul class="pagination pull-right">
+                                    <li {{action paginateToFirst}} class="pagination-btn"><span>&laquo;</span></li>
+                                    <li {{action paginateToPrev}} class="pagination-btn"><span>&lt;</span></li>
+                                    {{#each model.pagination}}
+                                    <li {{action paginateTo number}} {{bind-attr class="isActive:active"}}><span class="pagination-btn">{{number}}</span></li>
+                                    {{/each}}
+                                    <li {{action paginateToNext}} class="pagination-btn"><span>&gt;</span></li>
+                                    <li {{action paginateToLast}} class="pagination-btn"><span>&raquo;</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </script>

@@ -15,10 +15,6 @@
         read: function () {
             // this method will return list data
 
-            console.log('sortBy', App.Settings.sortBy);
-            console.log('order', App.Settings.order);
-            console.log('page', App.Settings.currentPage);
-
             // start spinner
             $('body')
                 .spin('large')

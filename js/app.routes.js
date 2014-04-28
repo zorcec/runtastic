@@ -5,7 +5,7 @@
     App.IndexRoute = Ember.Route.extend({
         model: function () {
             // retrieve data and return model
-            return App.RuntasticData.read();
+            return App.RuntasticData.list.content.length > 0 ? App.RuntasticData : App.RuntasticData.read();
         }
     });
 

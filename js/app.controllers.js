@@ -5,56 +5,50 @@
     App.IndexController = Ember.Controller.extend({
         actions: {
             sortBy: function (sortBy) {
-                var order;
-                var changeOrder;
+                var order = App.RuntasticData.list.sortAscending;
+                var column = App.RuntasticData.list.get('sortProperties')[0];
 
                 // determine order
-                changeOrder = (sortBy == App.Settings.sortBy) ? true : false;
-                if (changeOrder) {
-                    if (App.Settings.order == 'asc') order = 'desc';
-                    else order = 'asc';
-                } else {
-                    order = 'asc';
+                if (sortBy == column) {
+                    App.RuntasticData.list.toggleProperty('sortAscending');
                 }
 
-                // set ordering and refresh
-                App.Settings.sortBy = sortBy;
-                App.Settings.order = order;
-                App.RuntasticData.read();
+                App.RuntasticData.list.set('sortProperties', [sortBy]);
+                
             },
             paginateTo: function (page) {
                 // set page and refresh
-                App.Settings.currentPage = page;
+                App.SortOptionsServerSide.currentPage = page;
                 App.RuntasticData.read();
             },
             paginateToPrev: function () {
                 // set page and refresh
-                if (App.Settings.currentPage > 1) {
-                    App.Settings.currentPage--;
+                if (App.SortOptionsServerSide.currentPage > 1) {
+                    App.SortOptionsServerSide.currentPage--;
                     App.RuntasticData.read();
                 }
             },
             paginateToNext: function () {
                 // set page and refresh
-                if (App.Settings.currentPage < App.RuntasticData.totalPages) {
-                    App.Settings.currentPage++;
+                if (App.SortOptionsServerSide.currentPage < App.RuntasticData.totalPages) {
+                    App.SortOptionsServerSide.currentPage++;
                     App.RuntasticData.read();
                 }
             },
             paginateToLast: function (page) {
                 // set page and refresh
-                if (App.Settings.currentPage < App.RuntasticData.totalPages) {
-                    App.Settings.currentPage = App.RuntasticData.totalPages;
+                if (App.SortOptionsServerSide.currentPage < App.RuntasticData.totalPages) {
+                    App.SortOptionsServerSide.currentPage = App.RuntasticData.totalPages;
                     App.RuntasticData.read();
                 }
             },
             paginateToFirst: function (page) {
                 // set page and refresh
-                if (App.Settings.currentPage > 1) {
-                    App.Settings.currentPage = 1;
+                if (App.SortOptionsServerSide.currentPage > 1) {
+                    App.SortOptionsServerSide.currentPage = 1;
                     App.RuntasticData.read();
                 }
-            }
+            },
         }
     });
 

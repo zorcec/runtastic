@@ -11,10 +11,23 @@
     App.DateTime = Ember.TextField.extend({
         init: function () {
             this._super();
-            var date = this.get("value");
+            var date = this.get('value');
             var value = moment(date).format('DD.MM.YYYY, HH.mm');
-            this.set("value", value);
+            this.set('value', value);
         }
+    });
+
+    // Register a new type of an element
+    // Add posibility to read column name from select box
+    App.OrderBySelect = Ember.Select.extend({
+        didInsertElement: function () {
+            $('.table select').val('-');
+        },
+        valueChanged: function () {
+            var column = this.get('columnBinding')._from.split('.')[2];
+            App.SortOptionsServerSide.column = column;
+            App.SortOptionsServerSide.oldOrder = this.get('value');
+        }.observes('value'),
     });
 
     // Register a new type of an element
@@ -37,8 +50,8 @@
             // decode the trace
             var decodedTrace = google.maps.geometry.encoding.decodePath(encodedTrace);
 
-            // create the LatLng object that will be used to center both the map and the marker
-            var center = new google.maps.LatLng(46.60343, -1.84624);
+            // create the LatLng object 
+            var center = new google.maps.LatLng(0, 0);
 
             // gmap options
             var options = {
@@ -49,7 +62,7 @@
 
             var trace = new google.maps.Polyline({
                 path: decodedTrace,
-                strokeColor: "#FF0000",
+                strokeColor: '#FF0000',
                 strokeOpacity: 1.0,
                 strokeWeight: 2
             });

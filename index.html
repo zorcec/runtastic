@@ -23,7 +23,7 @@
         <script type="text/x-handlebars">
             {{! Skeleton template }}
             <div class="container">
-                <h1 class="title">Runtastic - Coding contest</h1>
+                <h1 class="title">Runtastic - Coding Contest</h1>
                 {{outlet}}
             </div>
             <footer class="container"></footer>
@@ -36,35 +36,80 @@
                     <thead>
                         <tr>
                             <td {{action sortBy 'id'}}>ID</td>
+                            <td>{{view App.OrderBySelect
+                                   content=App.SortOptionsServerSide.options
+                                   selectionBinding='App.SortOptionsServerSide.selected'
+                                   optionValuePath='content.value'
+                                   optionLabelPath='content.name'
+                                   columnBinding='id'
+                                   class="pull-right"}}</td>
                             <td {{action sortBy 'start_time'}}>Start time</td>
+                            <td>{{view App.OrderBySelect
+                                   content=App.SortOptionsServerSide.options
+                                   selectionBinding='App.SortOptionsServerSide.selected'
+                                   optionValuePath='content.value'
+                                   optionLabelPath='content.name'
+                                   columnBinding='start_time'
+                                   class="pull-right"}}</td>
                             <td {{action sortBy 'end_time'}}>End time</td>
+                            <td>{{view App.OrderBySelect
+                                   content=App.SortOptionsServerSide.options
+                                   selectionBinding='App.SortOptionsServerSide.selected'
+                                   optionValuePath='content.value'
+                                   optionLabelPath='content.name'
+                                   columnBinding='end_time'
+                                   class="pull-right"}}</td>
                             <td {{action sortBy 'duration'}}>Duration</td>
+                            <td>{{view App.OrderBySelect
+                                   content=App.SortOptionsServerSide.options
+                                   selectionBinding='App.SortOptionsServerSide.selected'
+                                   optionValuePath='content.value'
+                                   optionLabelPath='content.name'
+                                   columnBinding='duration'
+                                   class="pull-right"}}</td>
                             <td {{action sortBy 'distance'}}>Distance</td>
+                            <td>{{view App.OrderBySelect
+                                   content=App.SortOptionsServerSide.options
+                                   selectionBinding='App.SortOptionsServerSide.selected'
+                                   optionValuePath='content.value'
+                                   optionLabelPath='content.name'
+                                   columnBinding='distance'
+                                   class="pull-right"}}</td>
                             <td {{action sortBy 'sport_type_id'}}>Sport type ID</td>
+                            <td>{{view App.OrderBySelect
+                                   content=App.SortOptionsServerSide.options
+                                   selectionBinding='App.SortOptionsServerSide.selected'
+                                   optionValuePath='content.value'
+                                   optionLabelPath='content.name'
+                                   columnBinding='sport_type_id'
+                                   class="pull-right"}}</td>
                             <td {{action sortBy 'encoded_trace'}}>Trace</td>
+                            <td>{{view App.OrderBySelect
+                                   content=App.SortOptionsServerSide.options
+                                   selectionBinding='App.SortOptionsServerSide.selected'
+                                   optionValuePath='content.value'
+                                   optionLabelPath='content.name'
+                                   columnBinding='encoded_trace'
+                                   class="pull-right"}}</td>
                         </tr>
                     </thead>
                     <tbody class="table-striped">
-                        {{#each model.list}}
-                        {{#link-to 'detail' this tagName="tr"}}
-                            <td>{{id}}</td>
-                            <td>{{format-date start_time}}</td>
-                            <td>{{format-date end_time}}</td>
-                            <td>{{duration}}</td>
-                            <td>{{distance}}</td>
-                            <td>{{sport_type_id}}</td>
-                            {{#if encoded_trace}}
-                            <td>Yes</td>
-                            {{else}}
-                            <td>No</td>
-                            {{/if}}
+                        {{#each model.list.arrangedContent}}
+                        {{#link-to 'detail' this tagName='tr'}}
+                            <td colspan="2">{{id}}</td>
+                            <td colspan="2">{{format-date start_time}}</td>
+                            <td colspan="2">{{format-date end_time}}</td>
+                            <td colspan="2">{{duration}}</td>
+                            <td colspan="2">{{distance}}</td>
+                            <td colspan="2">{{sport_type_id}}</td>
+                            <td colspan="2">{{#if encoded_trace}}Yes{{else}}No{{/if}}</td>
                         {{/link-to}}
                         </tr>
                         {{/each}}
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6">
+                            <td colspan="14">
                                 <ul class="pagination pull-right">
                                     <li {{action paginateToFirst}} class="pagination-btn"><span>&laquo;</span></li>
                                     <li {{action paginateToPrev}} class="pagination-btn"><span>&lt;</span></li>
